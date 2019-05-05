@@ -8,20 +8,50 @@ JavaScript: A new hope! In this talk I would like to tell you about the WebUSB A
 
 ## Intro
 
+- USB devices are everywhere ✅
+- USB is the de-facto standard for wired peripherals ✅
+- Installing drivers for different devices can be difficult ✅
+- Integrating with these devices can be even harder ✅
+- You end up having to use old operating systems/browsers/software in order to support these devices ✅
+- This can lead to issues
+    - security ✅
+    - skills to support old systems ✅
+- Fast food pay point example
+    - Computer with Windows
+    - has a receipt printer
+    - has a fingerprint scanner
+    - has a credit card machine maybe?
+    - Computer becomes outdated, company wants to replace it with Android tablet - software must be created from scratch
 
+... WebUSB to the rescue
 
 ## What is WebUSB
 
-## Why WebUSB
+- API for accessing devices from the browser
+- Safely expose USB device services to the web
 
 ## How USB Works
 
+- Vendor/Product ID
+- Configuration
+- Interface
+- Endpoint
+
 ## Demo
 
-- demo.md
+- demo.md - fan or fingerprint reader????
 
-## Security
+## Security concerns
+
+- HTTPS
+- User interaction
+- User permission
+- Feature policy
+- No HID?
 
 ## Support
 
-## Conclusion
+- Chrome
+- Edge (as soon as it is based of Chromium)
+- Firefox - undecided
+- Safari - no :(
