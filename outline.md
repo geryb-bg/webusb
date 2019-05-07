@@ -13,17 +13,17 @@ JavaScript: A new hope! In this talk I would like to tell you about the WebUSB A
 - Installing drivers for different devices can be difficult ✅
 - Integrating with these devices can be even harder ✅
 - You end up having to use old operating systems/browsers/software in order to support these devices ✅
-- This can lead to issues
-    - security ✅
-    - skills to support old systems ✅
-- Fast food pay point example
+- This can lead to issues ✅
+    - security
+    - skills to support old systems
+- Fast food pay point example ✅
     - Computer with Windows
     - has a receipt printer
     - has a fingerprint scanner
     - has a credit card machine maybe?
     - Computer becomes outdated, company wants to replace it with Android tablet - software must be created from scratch
 
-... WebUSB to the rescue
+... WebUSB to the rescue ✅
 
 ## What is WebUSB
 
