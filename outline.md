@@ -25,12 +25,12 @@ JavaScript: A new hope! In this talk I would like to tell you about the WebUSB A
 
 ... WebUSB to the rescue ✅
 
-## What is WebUSB
+## What is WebUSB ✅
 
 - API for accessing devices from the browser
 - Safely expose USB device services to the web
 
-## How USB Works
+## How USB Works ✅
 
 - Vendor/Product ID
 - Configuration
@@ -39,7 +39,7 @@ JavaScript: A new hope! In this talk I would like to tell you about the WebUSB A
 
 ## Demo
 
-- demo.md - fan or fingerprint reader????
+- demo.md
 
 ## Security concerns
 
@@ -49,7 +49,7 @@ JavaScript: A new hope! In this talk I would like to tell you about the WebUSB A
 - Feature policy
 - No HID?
 
-## Support
+## Support ✅
 
 - Chrome
 - Edge (as soon as it is based of Chromium)
