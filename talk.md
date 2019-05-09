@@ -56,3 +56,18 @@ And lastly Isochronous transfers are used for things like streaming audio or vid
 
 The interrupt, bulk and Isochronous transfers all have to specify what endpoint they are communicating with. This is another thing that wireshark can help with.
 
+A website that uses the WebUSB API needs to run on HTTPS, this provides some level of security for the user as well as the developer.
+
+The API can not connect to a usb device without the user initiating a scan for connected devices, which can be done by a button click or any other user interaction.
+
+By connecting to the device the user gives the website permission to access the features, if this permission is not granted, ie if the user clicks cancel there is no way for the website to connect to a device.
+
+By claiming the interface we ensure that our computer is the only thing connected to the device at that point in time. So if our website is connected to the device then nothing else can connect to it.
+
+A feature policy is a mechanism that allows developers to selectively enable and disable various browser features and APIs. It can be defined via a HTTP header and/or an iframe "allow" attribute. You can define a feature that controls whether the usb attribute is exposed on the Navigator object, or in other words if you allow WebUSB.
+
+Lastly, most human interface devices will block you from claiming the interface and you will not be able to connect to them. This ensures that even if you as the user allow the website to connect to your keyboard, it would not be possible for them to claim the keyboard interface and create a key logger which captures all of your passwords.
+
+Support.
+
+Thanks questions
