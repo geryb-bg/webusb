@@ -3,9 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Web USB</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="icon" href="favicon.ico">
   </head>
   <body>
-    <input type="button" id="scanButton" value="Scan" />
+    <h1>WebUSB Fingerprint Scanner</h1>
+    <input type="button" id="connectButton" value="Connect" />
+    <input type="button" id="scanButton" value="Scan"/>
+    <h2 id="message"></h2>
     <canvas id="fingerImage" width="280" height="352"></canvas>
 
     <script src="index.js" type="module"></script>
