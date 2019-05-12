@@ -1,0 +1,154 @@
+{
+  "Initial HTML": {
+    "scope": "html",
+    "prefix": "html1",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html>",
+      "\t<head>",
+      "\t\t<meta charset=\"utf-8\" />",
+      "\t\t<title>WebUSB</title>",
+      "\t\t<link rel=\"stylesheet\" href=\"styles.css\" />",
+      "\t\t<link",
+      "\t\t\thref=\"https://fonts.googleapis.com/css?family=Orbitron\"",
+      "\t\t\trel=\"stylesheet\"",
+      "\t\t/>",
+      "\t\t<link rel=\"icon\" href=\"favicon.ico\" />",
+      "\t</head>",
+      "\t<body>",
+      "\t\t<h1>WebUSB</h1>",
+      "\t\t<input class=\"button\" type=\"button\" id=\"connectButton\" value=\"Connect\" />",
+      "\t\t<input class=\"button\" type=\"button\" id=\"disconnectButton\" value=\"Disconnect\" />",
+      "",
+      "\t\t<hr/>",
+      "\t\t<br/>",
+      "",
+      "\t\t<script src=\"index.js\" type=\"module\"></script>",
+      "\t</body>",
+      "</html>"
+    ],
+    "description": "Initial HTML to connect and disconnect"
+  },
+  "LED on and off HTML":{
+      "scope": "html",
+      "prefix": "html2",
+      "body": [
+        "<div id=\"connected\">",
+        "\tPin Number:",
+        "\t<input type=\"number\" id=\"pinNumber\" />",
+        "\t<br/><br/>",
+        "\t<input class=\"button\" type=\"button\" id=\"onOffButton\" value=\"Turn On\" />",
+        "\t<br/><hr/>",
+        "</div>",
+      ],
+      "description": "HTML for turning on/off LED"
+  },
+  "Servo on and off HTML": {
+      "scope": "html",
+      "prefix": "html3",
+      "body": [
+        "<input class=\"button\" type=\"button\" id=\"waveButton\" value=\"Wave\" />",
+        "<hr/>",
+      ],
+      "description": "HTML for turning on/off Servo"
+  },
+  "Get element by ID": {
+      "scope": "javascript",
+      "prefix": "getElement",
+      "body": "const $1 = document.getElementById('$1');",
+      "description": "JS get element by ID"
+  },
+  "Button on click": {
+      "scope": "javascript",
+      "prefix": "buttonClick",
+      "body": [
+        "$1Button.onclick = async () => {",
+        "};"
+      ],
+      "description": "JS button onclick method"
+  },
+  "connect to device": {
+      "scope": "javascript",
+      "prefix": "connect",
+      "body": [
+        "device = await navigator.usb.requestDevice({",
+        "\tfilters: [{ vendorId: 0x2341 }]",
+        "});",
+        "",
+        "await device.open();",
+        "",
+        "await device.selectConfiguration(1);",
+        "await device.claimInterface(2);",
+        "await device.controlTransferOut({",
+        "\trequestType: 'class',",
+        "\trecipient: 'interface',",
+        "\trequest: 0x22,",
+        "\tvalue: 0x01,",
+        "\tindex: 2",
+        "});",
+        "connectButton.style.display = 'none';",
+        "disconnectButton.style.display = 'initial';"
+      ],
+      "description": "Connect to device"
+  },
+  "disconnect from device": {
+      "scope": "javascript",
+      "prefix": "disconnect",
+      "body": [
+        "await device.controlTransferOut({",
+        "\trequestType: 'class',",
+        "\trecipient: 'interface',",
+        "\trequest: 0x22,",
+        "\tvalue: 0x00,",
+        "\tindex: 2",
+        "});",
+        "",
+        "await device.close();",
+        "",
+        "connectButton.style.display = 'initial';",
+        "disconnectButton.style.display = 'none';"
+      ],
+      "description": "Disconnect from device"
+  },
+  "Display connected div": {
+      "scope": "javascript",
+      "prefix": "displayConnected",
+      "body": "connected.style.display = '$1';",
+      "description": "Display connected div"
+  },
+  "Send data": {
+      "scope": "javascript",
+      "prefix": "sendData",
+      "body": [
+        "if (!pinNumber.value) {",
+        "\talert('Fill in a pin number!');",
+        "\treturn;",
+        "}",
+        "data[0] = pinNumber.value;",
+        "if (!data[1] || data[1] === 0) {",
+        "\tdata[1] = 255;",
+        "\tonOffButton.value = 'Turn Off';",
+        "} else {",
+        "\tdata[1] = 0;",
+        "\tonOffButton.value = 'Turn On';",
+        "}",
+        "await device.transferOut(4, data);"
+      ],
+      "description": "Send LED data"
+  },
+  "Send wave": {
+      "scope": "javascript",
+      "prefix": "sendWave",
+      "body": [
+        "if (!data[2] || data[2] === 0) {",
+        "\tdata[2] = 1;",
+        "\twaveButton.value = 'Stop';",
+        "} else {",
+        "\tdata[2] = 0;",
+        "\twaveButton.value = 'Wave';",
+        "}",
+        "await device.transferOut(4, data);"
+      ],
+      "description": "Send wave data"
+  }
+}

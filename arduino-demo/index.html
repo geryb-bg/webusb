@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>WebUSB</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Orbitron"
+            rel="stylesheet"
+        />
+        <link rel="icon" href="favicon.ico" />
+    </head>
+    <body>
+        <h1>WebUSB</h1>
+        <input class="button" type="button" id="connectButton" value="Connect" />
+        <input class="button" type="button" id="disconnectButton" value="Disconnect" />
+
+        <hr/>
+        <br/>
+
+        <div id="connected">
+            Pin Number:
+            <input type="number" id="pinNumber" />
+            <br/><br/>
+            <input class="button" type="button" id="onOffButton" value="Turn On" />
+            <br/><hr/>
+
+            <input class="button" type="button" id="waveButton" value="Wave" />
+            <hr/>
+        </div>
+
+        <script src="index.js" type="module"></script>
+    </body>
+</html>
