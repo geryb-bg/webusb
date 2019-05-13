@@ -5,7 +5,7 @@ This talk is for the following events:
 
 ## Slides
 
-Coming soon
+- [Power point slides](https://www.dropbox.com/s/bkr26pycapr8314/WebUSB%20-%20GDG.pptx?dl=0)
 
 ## Videos
 

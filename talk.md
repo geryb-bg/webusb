@@ -4,13 +4,13 @@ This last one is how I started out, and it is the thing that motivates me to nev
 
 But as I mentioned earlier, today we are talking about USB. What are some things that come to mind when I say USB? Keyboard? Mouse? Printer? Flash Drive? USB has kind of become the de-facto standard for wired peripherals. USB devices are everywhere, and used for so many "things".
 
-Most modern USB devices are plug and play, and usually they are quite easy to use. But every now and then you plug something into your computer, the dark side of the force responds with this... (device installing image) and the worst part is that more than half the time you were only ever going to use that thing that you plugged in that one time, never again. But now those drivers will be on your computer forever more.
+Most modern USB devices are plug and play, and usually they are quite easy to use. But every now and then you plug something into your computer, the dark side of the force responds with this... and the worst part is that more than half the time you were only ever going to use that thing that you plugged in that one time, never again. But now those drivers will be on your computer forever more.
 
 Has anyone here ever tried to integrate one of their solutions with a USB device? Sometimes, depending on the device it is pretty simple, there is a common API you can connect to and use, or someone has already integrated with it before. The problems come when that API becomes outdated, and relies on Windows XP with Internet Explorer 8 and a whole bunch of VB6 code that some person wrote before you were even born, but it works so you are not allowed to touch it. 
 
-This leads to problems, XP is an old operating system, it is no longer actively maintained, IE 8 has security issues that are probably not going to be fixed because it is outdated, and the people who understand the code that was written 30 years ago are already retired. 
+This leads to problems, XP is an old operating system, it is no longer actively maintained, IE 8 has security issues that are probably not going to be fixed because it is outdated, and the people who understand the code that was written 30 years ago are already retired.
 
-Last, and probably not least, all of us developers are like magpies, we are attracted to new and shiny technologies, we really don't want to be maintaining code that is older than we are.
+Also, if you are honest with yourself, all of us developers are like magpies, we are attracted to new and shiny technologies, we really don't want to be maintaining code that is older than we are. And lastly, there is a lot to say about a system that has been running pretty stable in production for the past 30 years, not many people here today can say they have written systems like that, it is really hard to replace something like that, I mean how can you be certain that the new shiny tech that you use is going to last another 30 years?
 
 Let me give you another example.
 
@@ -22,9 +22,11 @@ There is a computer, usually a touch screen, for the purpose of this example, le
 
 All of these bits need to be connected, one way for them to all be connected is via USB to the main computer running Windows. This means that we have some sort of Windows desktop application running and connecting to a number of different APIs in order to integrate with the different peripherals and allow the cashier to do their job quickly and efficiently. It works, there are no problems and the developer who created it is probably really happy with it.
 
-But technology moves fast, and everyone, including the neighbourhood road house, needs to keep up. So when the owner of the fast food place decides that it is time to upgrade from Windows computers to Android tablets what happens? Well, the only option is to rewrite the entire system for Android...
+But technology moves fast, and everyone, including the neighbourhood road house, needs to keep up. So when the owner of the fast food place decides that it is time to upgrade from Windows computers to Android tablets, for what ever reason. Maybe because they are cheaper or faster or more reliable. What happens then? Well, the only option is to rewrite the entire system for Android, right? But what if a few years down the line these android tablets become iPads. What then? Rewrite again, right?
 
-Or is it...
+Because we are using non-standard USB devices, and these devices require the hardware manufacturers to create SDKs that allow us to write native applications for them, we have no other option but to rewrite every time we have to change platforms.
+
+Or do we...
 
 JavaScript: A New Hope...
 
@@ -32,7 +34,7 @@ The WebUSB API is a proposed web platform standard that provides a way to expose
 
 The API is based on USB standards, therefore some hardware knowledge is required in order to understand how to use it. There are a number of good references that explain how USB works, however if you come from a web development background like me and you've never really done much hardware, it can be a little complicated. So, let me give you the short version of what I understand, and what I needed in order to hack a USB device.
 
-This is pretty much all of the code you need, now there are a few things we need to concentrate on in this code. Firstly, the filter, here we are filtering by the vendor ID, you can filter by a number of different things, the most common are the vendor and product IDs. These IDs are assigned by the USB standards standards committee as well as the manufacturers of the device. They are hexadecimal numbers and you can find them differently on different platforms. (show how to do it one mac)
+This is pretty much all of the code you need, now there are a few things we need to concentrate on in this code. Firstly, the filter, here we are filtering by the vendor ID, you can filter by a number of different things, the most common are the vendor and product IDs. These IDs are assigned by the USB standards committee as well as the manufacturers of the device. They are hexadecimal numbers and you can find them differently on different platforms. (show how to do it one mac)
 
 These filters are provided to limit the list when we scan for devices that are plugged into our computer.
 
@@ -48,13 +50,21 @@ There are 4 types of transfers that can happen between your computer and the dev
 
 The first is a control transfer, this is used for device configuration, it is the setup method in order for your device and computer to be able to communicate. This transfer always happens with a default endpoint, usually 0, which every interface has.
 
+The control transfer needs 4 options set on it. It needs a request type which specifies if the request we are sending to the device is a vendor specific protocol, part of the USB standards or a specific class on the device.
+
+The recipient sets whether the control is being transferred to the device as a whole or to a specific endpoint or interface.
+
+The request determines what we are asking the device to do, it is set by the USB standard, the device specification or they can be vendor specific.
+
+The value is based on the request type, so in our case what the device class expects from the host.
+
+And lastly the index is based on the recipient, since our recipient is the interface, our index is 2, same as the interface we claimed.
+
 Interrupt transfers are used for low latency data, things like mouse clicks and button presses use this kind of transfer to send data from device to host.
 
 Bulk transfers allow for delays, they are used for sending big amounts of data. A USB flash disk would use this kind of transfer.
 
 And lastly Isochronous transfers are used for things like streaming audio or video, these transfers can not guarantee that the data will be delivered, but can reserve bandwidth in order to guarantee the time in which the data will be delivered. This is why they can be used for streaming.
-
-The interrupt, bulk and Isochronous transfers all have to specify what endpoint they are communicating with. This is another thing that wireshark can help with.
 
 A website that uses the WebUSB API needs to run on HTTPS, this provides some level of security for the user as well as the developer.
 
