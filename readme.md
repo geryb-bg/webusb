@@ -22,3 +22,4 @@ Coming soon
 - [Exploring WebUSB and its exciting potential - Suz Hinton - JSConf US 2018](https://www.youtube.com/watch?v=IpfZ8Nj3uiE)
 - [Basic punch detection using WebUSB](https://medium.com/@kennethrohde/basic-punch-detection-using-web-usb-d9fd4a1387f7)
 - [Connecting to USB devices with your browser](https://medium.com/@gendor/connecting-to-usb-devices-with-your-browser-d433a6df6f2)
+- [OpenANDID](https://github.com/shawnsarwar/OpenANDID)
